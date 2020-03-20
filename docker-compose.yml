@@ -15,7 +15,10 @@ services:
             - ./gateway/gateway.config.yml:/usr/src/app/config/gateway.config.yml
         depends_on:
             - notfound
-            - template
+            - auth
+            - homepage
+            - dashboard
+            - user
         networks:
             - gateway
 
@@ -41,18 +44,58 @@ services:
     notfound:
         image: shipyardsuite/notfound:develop
         container_name: notfound
-        ports:
-            - "3003:3003"
+        expose:
+            - "3003"
         environment:
             SERVICE_PORT: 3003
         networks: 
             - gateway
 
-    template:
+    homepage:
+        image: shipyardsuite/homepage:develop
+        container_name: homepage
+        expose:
+            - "3001"
+        depends_on:
+            - mongo 
+        environment:
+            SERVICE_PORT: 3001
+            SERVICE_NAME: homepage
+            DATABASE_URL: ${DATABASE_URL}
+        networks: 
+            - gateway
+
+    auth:
+        image: shipyardsuite/auth:develop
+        container_name: auth
+        expose:
+            - "3002"
+        environment:
+            SERVICE_NAME: auth
+            DATABASE_URL: ${DATABASE_URL}
+            SERVICE_PORT: 3002
+        depends_on: 
+            - mongo
+        networks: 
+            - gateway
+
+    dashboard:
+        image: shipyardsuite/dashboard:develop
+        container_name: dashboard
+        expose:
+            - "3002"
+        environment:
+            SERVICE_NAME: dashboard
+            DATABASE_URL: ${DATABASE_URL}
+            SERVICE_PORT: 3004
+        networks: 
+            - gateway
+
+    user:
         build: ./
-        container_name: template
-        ports:
-            - "3000:3000"
+        container_name: ${SERVICE_NAME}
+        expose:
+            - "${SERVICE_PORT}"
         volumes:
             - ./:/usr/src/app
         working_dir: /usr/src/app
@@ -62,7 +105,7 @@ services:
         networks:
             - gateway
         environment:
-            SERVICE_NAME: template
+            SERVICE_NAME: ${SERVICE_NAME}
             DATABASE_URL: ${DATABASE_URL}
             SERVICE_PORT: ${SERVICE_PORT}
 

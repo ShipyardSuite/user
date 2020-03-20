@@ -1,8 +1,11 @@
 {
-	"name": "microservice-template",
+	"name": "user",
 	"version": "0.1.0",
-	"description": "Microservice Template for Shipyard GCDN",
-	"main": "dist/server.js",
+	"description": "User service",
+	"main": "brunch-config.js",
+	"directories": {
+		"test": "tests"
+	},
 	"scripts": {
 		"start": "npm run build:prod && npm run start:prod",
 		"start:dev": "npm i bcrypt && concurrently \"brunch watch\" \"nodemon --watch 'server/**/*.ts' --exec 'ts-node' server/server.ts\"",
@@ -10,9 +13,10 @@
 		"start:prod": "node dist/server.js",
 		"test": "mocha -r ts-node/register tests/**/*.test.ts"
 	},
-	"keywords": [],
-	"author": "Shipyard Suite <shipyardsuite@gmail.com>",
-	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ShipyardSuite/user.git"
+	},
 	"dependencies": {
 		"@types/chai": "^4.2.11",
 		"bcrypt": "^4.0.1",
@@ -23,6 +27,7 @@
 		"react-dom": "^16.9.0",
 		"react-router": "^5.0.0",
 		"react-router-dom": "^5.0.0",
+		"semantic-ui-react": "^0.88.2",
 		"ts-node": "^8.4.1",
 		"typescript": "^3.4.5"
 	},
@@ -48,12 +53,11 @@
 		"nodemon": "^2.0.2",
 		"uglify-js-brunch": "^2.0.0"
 	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/ShipyardSuite/microservice-template.git"
-	},
+	"keywords": [],
+	"author": "Shipyard Suite <shipyardsuite@gmail.com>",
+	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/ShipyardSuite/microservice-template/issues"
+		"url": "https://github.com/ShipyardSuite/user/issues"
 	},
-	"homepage": "https://github.com/ShipyardSuite/microservice-template#readme"
+	"homepage": "https://github.com/ShipyardSuite/user#readme"
 }

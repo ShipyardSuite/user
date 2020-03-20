@@ -294,18 +294,215 @@ exports.default = { ExampleComponent: _ExampleComponent2.default };
 exports.ExampleComponent = _ExampleComponent2.default;
 });
 
+require.register("components/Layout/Layout.js", function(exports, require, module) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _ = require('./../');
+
+var _semanticUiReact = require('semantic-ui-react');
+
+var _storage = require('./../../utils/storage');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Layout = function (_Component) {
+	_inherits(Layout, _Component);
+
+	function Layout(props) {
+		_classCallCheck(this, Layout);
+
+		var _this = _possibleConstructorReturn(this, (Layout.__proto__ || Object.getPrototypeOf(Layout)).call(this, props));
+
+		_this.state = {};
+		return _this;
+	}
+
+	_createClass(Layout, [{
+		key: 'logout',
+		value: function logout() {
+			var obj = (0, _storage.getFromStorage)('botany-bay');
+
+			if (obj && obj.token) {
+				var token = obj.token;
+
+
+				fetch('/auth/api/logout?id=' + token).then(function (res) {
+					return res.json();
+				}).then(function (json) {
+					if (json.success) {
+						localStorage.removeItem('botany-bay');
+
+						window.location.replace('http://localhost:8080/auth/login');
+					}
+				});
+			}
+		}
+	}, {
+		key: 'handleItemClick',
+		value: function handleItemClick(name) {
+			this.setState({ activeItem: name });
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var isLoading = this.props.isLoading;
+
+
+			return _react2.default.createElement(
+				'div',
+				null,
+				_react2.default.createElement(_.LoadingSpinner, { isLoading: isLoading, unmountOnHide: true }),
+				!isLoading && _react2.default.createElement(
+					_semanticUiReact.Container,
+					{ fluid: true },
+					_react2.default.createElement(
+						_semanticUiReact.Button,
+						{ onClick: this.logout.bind(this) },
+						'Logout'
+					),
+					_react2.default.createElement(
+						'div',
+						null,
+						this.props.children
+					)
+				)
+			);
+		}
+	}]);
+
+	return Layout;
+}(_react.Component);
+
+exports.default = Layout;
+});
+
+;require.register("components/Layout/index.js", function(exports, require, module) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Layout = undefined;
+
+var _Layout = require('./Layout');
+
+var _Layout2 = _interopRequireDefault(_Layout);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = { Layout: _Layout2.default };
+exports.Layout = _Layout2.default;
+});
+
+require.register("components/LoadingSpinner/LoadingSpinner.js", function(exports, require, module) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _semanticUiReact = require('semantic-ui-react');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ExampleComponent = function (_Component) {
+	_inherits(ExampleComponent, _Component);
+
+	function ExampleComponent(props) {
+		_classCallCheck(this, ExampleComponent);
+
+		return _possibleConstructorReturn(this, (ExampleComponent.__proto__ || Object.getPrototypeOf(ExampleComponent)).call(this, props));
+	}
+
+	_createClass(ExampleComponent, [{
+		key: 'render',
+		value: function render() {
+			var isLoading = this.props.isLoading;
+
+
+			return _react2.default.createElement(
+				_semanticUiReact.Transition,
+				{ visible: isLoading, animation: 'fade', duration: 500 },
+				_react2.default.createElement(
+					_semanticUiReact.Segment,
+					{ basic: true, style: { height: '100vh' } },
+					_react2.default.createElement(
+						_semanticUiReact.Dimmer,
+						{ active: true, inverted: true },
+						_react2.default.createElement(_semanticUiReact.Loader, { size: 'massive' })
+					)
+				)
+			);
+		}
+	}]);
+
+	return ExampleComponent;
+}(_react.Component);
+
+exports.default = ExampleComponent;
+});
+
+;require.register("components/LoadingSpinner/index.js", function(exports, require, module) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.LoadingSpinner = undefined;
+
+var _LoadingSpinner = require('./LoadingSpinner');
+
+var _LoadingSpinner2 = _interopRequireDefault(_LoadingSpinner);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = { LoadingSpinner: _LoadingSpinner2.default };
+exports.LoadingSpinner = _LoadingSpinner2.default;
+});
+
 require.register("components/index.js", function(exports, require, module) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ExampleComponent = undefined;
+exports.Layout = exports.LoadingSpinner = undefined;
 
-var _ExampleComponent = require('./ExampleComponent');
+var _LoadingSpinner = require('./LoadingSpinner');
 
-exports.default = { ExampleComponent: _ExampleComponent.ExampleComponent };
-exports.ExampleComponent = _ExampleComponent.ExampleComponent;
+var _Layout = require('./Layout');
+
+exports.default = { LoadingSpinner: _LoadingSpinner.LoadingSpinner, Layout: _Layout.Layout };
+exports.LoadingSpinner = _LoadingSpinner.LoadingSpinner;
+exports.Layout = _Layout.Layout;
 });
 
 require.register("containers/Home/Home.js", function(exports, require, module) {
@@ -321,8 +518,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _components = require('./../../components/');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -337,19 +532,16 @@ var Home = function (_Component) {
 	function Home(props) {
 		_classCallCheck(this, Home);
 
-		var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
-
-		_this.state = {};
-		return _this;
+		return _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this, props));
 	}
 
 	_createClass(Home, [{
 		key: 'render',
 		value: function render() {
 			return _react2.default.createElement(
-				'div',
+				'p',
 				null,
-				_react2.default.createElement(_components.ExampleComponent, { url: '/template/api/test' })
+				'User service...'
 			);
 		}
 	}]);
@@ -378,89 +570,18 @@ exports.default = { Home: _Home2.default };
 exports.Home = _Home2.default;
 });
 
-require.register("containers/NotFound/NotFound.js", function(exports, require, module) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var NotFound = function (_Component) {
-	_inherits(NotFound, _Component);
-
-	function NotFound(props) {
-		_classCallCheck(this, NotFound);
-
-		var _this = _possibleConstructorReturn(this, (NotFound.__proto__ || Object.getPrototypeOf(NotFound)).call(this, props));
-
-		_this.state = {};
-		return _this;
-	}
-
-	_createClass(NotFound, [{
-		key: 'render',
-		value: function render() {
-			return _react2.default.createElement(
-				'p',
-				null,
-				'Page not found...'
-			);
-		}
-	}]);
-
-	return NotFound;
-}(_react.Component);
-
-exports.default = NotFound;
-});
-
-require.register("containers/NotFound/index.js", function(exports, require, module) {
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.NotFound = undefined;
-
-var _NotFound = require('./NotFound');
-
-var _NotFound2 = _interopRequireDefault(_NotFound);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-exports.default = { NotFound: _NotFound2.default };
-exports.NotFound = _NotFound2.default;
-});
-
 require.register("containers/index.js", function(exports, require, module) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.NotFound = exports.Home = undefined;
+exports.Home = undefined;
 
 var _Home = require('./Home');
 
-var _NotFound = require('./NotFound');
-
-exports.default = { Home: _Home.Home, NotFound: _NotFound.NotFound };
+exports.default = { Home: _Home.Home };
 exports.Home = _Home.Home;
-exports.NotFound = _NotFound.NotFound;
 });
 
 require.register("initialize.js", function(exports, require, module) {
@@ -493,7 +614,7 @@ _reactDom2.default.render(_react2.default.createElement(
 		_react2.default.createElement(
 			_reactRouterDom.Switch,
 			null,
-			_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/template/', component: _containers.Home }),
+			_react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/user/', component: _containers.Home }),
 			_react2.default.createElement(_reactRouterDom.Route, {
 				render: function render() {
 					window.location.replace('http://localhost:8080/notfound/');
@@ -505,6 +626,46 @@ _reactDom2.default.render(_react2.default.createElement(
 ), document.querySelector('#root'));
 });
 
+require.register("utils/storage.js", function(exports, require, module) {
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+exports.getFromStorage = getFromStorage;
+exports.setInStorage = setInStorage;
+function getFromStorage(key) {
+	if (!key) {
+		return null;
+	}
+
+	try {
+		var valueStr = localStorage.getItem(key);
+
+		if (valueStr) {
+			return JSON.parse(valueStr);
+		}
+
+		return null;
+	} catch (err) {
+		return null;
+	}
+}
+
+function setInStorage(key, obj) {
+	if (!key) {
+		console.error('Error: Key is missing');
+	}
+
+	try {
+		localStorage.setItem(key, JSON.stringify(obj));
+	} catch (err) {
+		console.error(err);
+	}
+}
+});
+
+;require.alias("node-browser-modules/node_modules/buffer/index.js", "buffer");
 require.alias("process/browser.js", "process");process = require('process');require.register("___globals___", function(exports, require, module) {
   
 });})();require('___globals___');

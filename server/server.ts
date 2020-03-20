@@ -1,6 +1,5 @@
 import mongoose = require('mongoose');
 import express = require('express');
-import newRelic = require('newrelic');
 
 import { ExpressConfig } from './config/ExpressConfig';
 import { RoutesConfig } from './config/RoutesConfig';
@@ -14,7 +13,7 @@ export class Server {
 
 	constructor() {
 		this.app = express();
-		this.port = Number(process.env.SERVICE_PORT);
+		this.port = Number(process.env.SERVICE_PORT) || 3000;
 		this.serviceName = String(process.env.SERVICE_NAME);
 		this.database = String(process.env.DATABASE_URL);
 	}
