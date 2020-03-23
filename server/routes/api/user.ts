@@ -58,6 +58,10 @@ module.exports = (app: express.Application) => {
 		);
 	});
 
+	/**
+ 	* @todo Add Update User functionality
+ 	* @body Currently, this api call is only a placeholder, implement update functionality for user management and profile
+	*/
 	// Update User
 	app.put(`/${serviceName}/api/update`, (req, res, next) => {
 		return res.send({
