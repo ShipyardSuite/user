@@ -12,10 +12,8 @@ module.exports = (app: express.Application) => {
  	*/
 
 	// Get user by Token
-	app.get(`/${serviceName}/api/`, (req, res, next) => {
-		const { query } = req;
-
-		UserSession.findById(query.id, (err, data: any) => {
+	app.get(`/${serviceName}/api/token/:token`, (req, res, next) => {
+		UserSession.findById(req.params.token, (err, data: any) => {
 			User.findById(data.userId, (err, user: any) => {
 				if (err) {
 					console.log(err);
@@ -36,7 +34,7 @@ module.exports = (app: express.Application) => {
 	});
 
 	// Get User-Data by id
-	app.get(`/${serviceName}/api/user/:id`, (req, res, next) => {
+	app.get(`/${serviceName}/api/id/:id`, (req, res, next) => {
 		User.find(
 			{
 				_id: req.params.id
@@ -52,14 +50,20 @@ module.exports = (app: express.Application) => {
 
 				return res.send({
 					success: true,
-					user
+					data: {
+						user
+					}
 				});
 			}
 		);
 	});
 
+	/**
+ 	* @todo Add Update User functionality
+ 	* @body Currently, this api call is only a placeholder, implement update functionality for user management and profile
+	*/
 	// Update User
-	app.put(`/${serviceName}/api/`, (req, res, next) => {
+	app.put(`/${serviceName}/api/update`, (req, res, next) => {
 		return res.send({
 			success: true
 		});
@@ -77,7 +81,9 @@ module.exports = (app: express.Application) => {
 			}
 			return res.send({
 				success: true,
-				users
+				data: {
+					users
+				}
 			});
 		});
 	});
