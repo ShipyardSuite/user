@@ -8,6 +8,30 @@
 
 User management service
 
+---
+
+## Environment variables
+
+| Name                  | Type     | Default | Description                       |
+| --------------------- | -------- | ------- | --------------------------------- |
+| **SERVICE_NAME:**     | `String` | user    | Microservice name.                |
+| **SERVICE_PORT:**     | `Number` | 3009    | Microservice port.                |
+| **DATABASE_URL:**     | `String` |         | Database url.                     |
+
+## API
+
+| Type | URL             | Body                                        | Query               | Response              | Description                                             |
+| ---- | ----------------| ------------------------------------------- | ------------------- | --------------------- | ------------------------------------------------------- |
+| GET  | `/api/status`   |                                             |                     | **online**: `boolean` | Testing service connection.                             |
+| PUT  | `/api/update`   |                                             |                     |                       | Update user informations.                               |
+| GET  | `/api/token`    |                                             | **token**: `String` |                       | Get user informations by session token.                 |
+| GET  | `/api/id`       |                                             | **token**: `id`     |                       | Get user informations by user-id.                       |
+| GET  | `/api/all`      |                                             |                     |                       | Get all users.                                          |
+
+## Usage
+
+**LOCAL**: create a `.env` file, with the specified variables and run `docker-compose up -d --build`.
+
 ## License
 
 This project is released under the [Apache version 2](LICENSE) license.
