@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 const { User, UserSession } = require('./../models');
 
-module.exports = (app, serviceName) => {
+module.exports = (app, logger, serviceName) => {
 	// Get user by Token
 	app.get(`/${serviceName}/api/token`, (req, res) => {
 		const { query } = req;
@@ -12,7 +12,7 @@ module.exports = (app, serviceName) => {
 		UserSession.findById(token, (err, data) => {
 			User.findById(data.userId, (err, user) => {
 				if (err) {
-					console.log(err);
+					logger.error(err);
 
 					return res.json({
 						success: false
@@ -40,7 +40,7 @@ module.exports = (app, serviceName) => {
 			},
 			(err, user) => {
 				if (err) {
-					console.log(err);
+					logger.error(err);
 
 					return res.json({
 						success: false,
@@ -82,7 +82,7 @@ module.exports = (app, serviceName) => {
 	app.get(`/${serviceName}/api/all`, (req, res, next) => {
 		User.find({}, (err, users) => {
 			if (err) {
-				console.log('error:', err);
+				logger.error(err);
 				return res.json({
 					success: false,
 					message: err
