@@ -1,9 +1,5 @@
-'use strict';
+import User from "./User";
+import UserSession from "./UserSession";
 
-const User = require('./User');
-const UserSession = require('./UserSession');
-
-module.exports = {
-	User,
-	UserSession
-};
+export default { User, UserSession };
+export { User, UserSession };
