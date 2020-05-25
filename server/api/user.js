@@ -1,7 +1,7 @@
 "use strict";
 
 import mongoose from "mongoose";
-import { User, UserSession } from './../models';
+import { User, UserSession } from "./../models";
 
 export const user = (app, logger, serviceName) => {
     // Get user by Token
