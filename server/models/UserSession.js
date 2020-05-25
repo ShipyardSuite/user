@@ -1,20 +1,24 @@
 'use strict';
 
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
-const UserSessionSchema = new mongoose.Schema({
-	userId: {
-		type: String,
-		default: ''
-	},
-	timestamp: {
-		type: Date,
-		default: Date.now()
-	},
-	isDeleted: {
-		type: Boolean,
-		default: false
-	}
-});
+const UserSessionSchema = mongoose.Schema({
+    userId: {
+        type: String,
+        default: '',
+        required: true,
+        index: true
+    },
+    timestamp: {
+        type: Date,
+        default: Date.now()
+    },
+    isDeleted: {
+        type: Boolean,
+        default: false
+    }
+}, { collection: 'UserSession' });
 
-module.exports = mongoose.model('UserSession', UserSessionSchema);
+let UserSessionModel = mongoose.model('UserSession', UserSessionSchema);
+
+export default UserSessionModel;
