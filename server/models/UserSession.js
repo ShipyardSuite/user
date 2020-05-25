@@ -17,7 +17,7 @@ const UserSessionSchema = mongoose.Schema({
         type: Boolean,
         default: false
     }
-}, { collection: "UserSession" });
+}, { collection: "userSessions" });
 
 let UserSessionModel = mongoose.model("UserSession", UserSessionSchema);
 
