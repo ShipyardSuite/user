@@ -2,7 +2,7 @@
 
 import mongoose from "mongoose";
 
-const UserSessionSchema = mongoose.Schema({
+const userSessionSchema = mongoose.Schema({
     userId: {
         type: String,
         default: "''",
@@ -19,6 +19,6 @@ const UserSessionSchema = mongoose.Schema({
     }
 }, { collection: "UserSession" });
 
-let UserSessionModel = mongoose.model("UserSession", UserSessionSchema);
+let UserSessionModel = mongoose.model("UserSession", userSessionSchema);
 
 export default UserSessionModel;
