@@ -8,7 +8,7 @@ import { exampleFunction } from "./utils/example";
 
 import { LoggerConfig, DBConfig, ExpressConfig } from "./config";
 
-import { routes } from './api/';
+import { routes } from "./api/";
 
 class App {
     constructor() {

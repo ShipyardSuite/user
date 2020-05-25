@@ -6,7 +6,7 @@ import cryptoJS from "crypto-js";
 const UserSchema = mongoose.Schema({
     userId: {
         type: String,
-        default: '',
+        default: "",
         required: true,
         index: true
     },
@@ -18,9 +18,9 @@ const UserSchema = mongoose.Schema({
         type: Boolean,
         default: false
     }
-}, { collection: 'User' });
+}, { collection: "User" });
 
-let UserModel = mongoose.model('User', UserSchema);
+let UserModel = mongoose.model("User", UserSchema);
 
 UserModel.generateHash = (password) => {
     const encrypted = cryptoJS.AES.encrypt(password, cryptoJS.SHA256(password).toString());

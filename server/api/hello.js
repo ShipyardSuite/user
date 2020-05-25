@@ -6,4 +6,4 @@ export const hello = (app, logger, serviceName) => {
 
         res.end(logger.info(`Hello from service "${serviceName}"`, { status: res.statusCode }));
     });
-}
+};

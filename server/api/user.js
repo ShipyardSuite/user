@@ -18,7 +18,7 @@ export const user = (app, logger, serviceName) => {
                 });
             }
 
-            if (data && data.userId !== undefined) {
+            if (data && data.userId) {
                 User.findById(data.userId, (err, user) => {
                     if (err) {
                         logger.error(err);
@@ -113,4 +113,4 @@ export const user = (app, logger, serviceName) => {
             });
         });
     });
-}
+};

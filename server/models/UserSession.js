@@ -5,7 +5,7 @@ import mongoose from "mongoose";
 const UserSessionSchema = mongoose.Schema({
     userId: {
         type: String,
-        default: '',
+        default: "''",
         required: true,
         index: true
     },
@@ -17,8 +17,8 @@ const UserSessionSchema = mongoose.Schema({
         type: Boolean,
         default: false
     }
-}, { collection: 'UserSession' });
+}, { collection: "UserSession" });
 
-let UserSessionModel = mongoose.model('UserSession', UserSessionSchema);
+let UserSessionModel = mongoose.model("UserSession", UserSessionSchema);
 
 export default UserSessionModel;
