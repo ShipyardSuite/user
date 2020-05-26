@@ -1,1 +1,0 @@
-			format: winston.format.timestamp(),
