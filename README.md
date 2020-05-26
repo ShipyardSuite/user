@@ -8,6 +8,7 @@
 ![GitHub](https://img.shields.io/github/license/shipyardsuite/user?style=flat-square)
 
 # nodejs-service-template
+
 service template for nodejs applications.
 
 ## Environment variables
