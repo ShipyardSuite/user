@@ -35,6 +35,18 @@ services:
         networks:
             - gateway
 
+    auth:
+        image: shipyardsuite/auth:develop
+        command: sh -c 'npm run start'
+        container_name: auth
+        ports:
+            - "3002:3002"
+        networks:
+            - gateway
+        environment:
+            SERVICE_NAME: auth
+            SERVICE_PORT: 3002
+
     user:
         build:
             context: ./
@@ -49,14 +61,8 @@ services:
         networks:
             - gateway
         environment:
-            SERVICE_PORT: ${SERVICE_PORT}
-            SERVICE_NAME: ${SERVICE_NAME}
-            HEALTHCHECK_ID: ${HEALTHCHECK_ID}
-        healthcheck:
-            test: curl --fail -s https://hc-ping.com/${HEALTHCHECK_ID} || exit 1
-            interval: 20s
-            timeout: 10s
-            retries: 3
+            SERVICE_PORT: 3009
+            SERVICE_NAME: user
 
 networks:
     gateway:
